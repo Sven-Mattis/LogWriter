@@ -40,7 +40,7 @@ public class LogWriter {
         try {
             this.appendToLog(lvl, msg);
         } catch (IOException e) {
-            logger.log(Level.WARNING, "Unable to create file: " + logDataName);
+            logger.log(Level.WARNING, "Unable to create file: " + String.format("%s.txt",logDataName));
         }
 
         return this;
@@ -62,7 +62,7 @@ public class LogWriter {
 
         msg = String.format("%s %s",lvl.getLocalizedName(),msg);
 
-        FileWriter writer = new FileWriter(logDataName);
+        FileWriter writer = new FileWriter(String.format("%s.txt",logDataName));
 
         tillNow.chars().forEach(chr -> {
             try {
@@ -92,7 +92,7 @@ public class LogWriter {
     private String getAll() throws FileNotFoundException {
         String str = "";
 
-        Scanner sc = new Scanner(new FileReader(logDataName));
+        Scanner sc = new Scanner(new FileReader(String.format("%s.txt",logDataName)));
 
         while (sc.hasNextLine()) {
             str += String.format("%s\n",sc.nextLine());
